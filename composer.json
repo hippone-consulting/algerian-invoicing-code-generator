@@ -6,6 +6,7 @@
             "email": "cherif@hippone.consulting"
         }
     ],
+    "license": "MIT",
     "require": {
         "php": "^7.4"
     },
