@@ -1,0 +1,25 @@
+{
+    "name": "hippone/algerian-invoice-code-generator",
+    "authors": [
+        {
+            "name": "Cherif BOUCHELAGHEM",
+            "email": "cherif@hippone.consulting"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hippone\\InvoiceCode\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Hippone\\InvoiceCode\\Test\\": "tests"
+        }
+    }
+}
