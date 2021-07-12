@@ -18,17 +18,13 @@ class SQLiteIdentifiableProviderTest extends TestCase
 
     protected function setUp(): void
     {
-        try {
-            $this->pdo = new PDO('sqlite:./tests/Persistence/SQLite/invoices.db');
-            $this->pdo->exec(
+        $this->pdo = new PDO('sqlite:./tests/Persistence/SQLite/invoices.db');
+        $this->pdo->exec(
             '
                         CREATE TABLE IF NOT EXISTS invoices (
                         id   INTEGER PRIMARY KEY
                     )'
             );
-        } catch (\Throwable $e) {
-            var_dump($e);exit;
-        }
 
         $this->identifiableProvider = new SQLiteIdentifiableProvider($this->pdo);
     }
@@ -44,6 +40,6 @@ class SQLiteIdentifiableProviderTest extends TestCase
         $year = DateTimeImmutable::createFromFormat('Y', '2021');
         $code = $this->identifiableProvider->nextCode($year);
         assertInstanceOf(CodeComponents::class, $code);
-        assertEquals('1/2021', $code->toString());
+        assertEquals('0001/2021', $code->toString());
     }
 }

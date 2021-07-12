@@ -26,6 +26,6 @@ class FakeIdentifiableProviderTest extends TestCase
         $year = DateTimeImmutable::createFromFormat('Y', '2021');
         $code = $this->identifiableProvider->nextCode($year);
         assertInstanceOf(CodeComponents::class, $code);
-        assertEquals('1/2021', $code->toString());
+        assertEquals('0001/2021', $code->toString());
     }
 }

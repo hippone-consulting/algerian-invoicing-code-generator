@@ -21,15 +21,8 @@ final class CodeComponents
      */
     private DateTimeImmutable $year;
 
-    /**
-     * CodeComponents constructor.
-     * @param string $sequentialNumber
-     * @param DateTimeImmutable $year
-     */
-    private function __construct(string $sequentialNumber, DateTimeImmutable $year)
+    private function __construct()
     {
-        $this->sequentialNumber = $sequentialNumber;
-        $this->year = $year;
     }
 
     /**
@@ -37,9 +30,30 @@ final class CodeComponents
      * @param DateTimeImmutable $year
      * @return static
      */
-    public static function from(string $sequentialNumber, DateTimeImmutable $year): self
+    public static function from(int $sequentialNumber, DateTimeImmutable $year): self
     {
-        return new CodeComponents($sequentialNumber, $year);
+        $instance = new CodeComponents();
+        $sequentialNumberStr = $instance->normalizeSequentialNumber($sequentialNumber);
+        $instance->sequentialNumber = $sequentialNumberStr;
+        $instance->year = $year;
+        return $instance;
+    }
+
+    private function normalizeSequentialNumber(int $sequentialNumber): string
+    {
+        $zerosMap = [
+            '0' => ['min' => 99, 'max' => 1000],
+            '00' => ['min' => 9, 'max' => 100],
+            '000' => ['min' => 0, 'max' => 10],
+        ];
+
+        foreach ($zerosMap as $howManyZeros => $minMax) {
+            if ($sequentialNumber > $minMax['min'] && $sequentialNumber < $minMax['max']) {
+                return $howManyZeros . $sequentialNumber;
+            }
+        }
+
+        return (string) $sequentialNumber;
     }
 
     /**

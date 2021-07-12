@@ -27,6 +27,6 @@ class SQLiteIdentifiableProvider implements IdentifiableProvider
         $statement->execute();
         $currentCount = $statement->fetchColumn();
         $sequentialNumber = $currentCount + 1;
-        return CodeComponents::from((string)$sequentialNumber, $year);
+        return CodeComponents::from($sequentialNumber, $year);
     }
 }

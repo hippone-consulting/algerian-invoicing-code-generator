@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertInstanceOf;
 
-class InvoiceCodeServiceTest extends TestCase
+class CodeGeneratorTest extends TestCase
 {
     private CodeGeneratorInterface $invoiceCodeGenerator;
 
@@ -28,8 +28,8 @@ class InvoiceCodeServiceTest extends TestCase
             DateTimeImmutable::createFromFormat('Y', '2021')
         );
         assertInstanceOf(CodeDescriptor::class, $code);
-        assertEquals('1', $code->sequentialNumber());
+        assertEquals('0001', $code->sequentialNumber());
         assertEquals(DateTimeImmutable::createFromFormat('Y', '2021'), $code->year());
-        assertEquals('1/2021', $code->formatted());
+        assertEquals('0001/2021', $code->formatted());
     }
 }
