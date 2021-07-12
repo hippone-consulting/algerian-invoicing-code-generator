@@ -26,6 +26,6 @@ final class FakeIdentifiableProvider implements IdentifiableProvider
     {
         $currentCount = count($this->instances);
         $sequentialNumber = $currentCount + 1;
-        return CodeComponents::from((string)$sequentialNumber, $year);
+        return CodeComponents::from($sequentialNumber, $year);
     }
 }
