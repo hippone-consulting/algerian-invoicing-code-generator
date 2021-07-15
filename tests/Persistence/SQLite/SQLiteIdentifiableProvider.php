@@ -23,7 +23,12 @@ class SQLiteIdentifiableProvider implements IdentifiableProvider
 
     public function nextCode(DateTimeImmutable $year): CodeComponents
     {
-        $statement = $this->pdo->prepare('SELECT COUNT(*) FROM invoices');
+        $statement = $this->pdo->prepare('
+                            SELECT COUNT(*) FROM invoices 
+                            AS i 
+                            WHERE strftime("%Y", i.created_at) = :currentYear
+        ');
+        $statement->bindValue(':currentYear', $year->format('Y'));
         $statement->execute();
         $currentCount = $statement->fetchColumn();
         $sequentialNumber = $currentCount + 1;
